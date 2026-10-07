@@ -1,0 +1,195 @@
+
+/* =========================
+   GENERAL
+   ========================= */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(98, 94, 94);
+    color: #222;
+    margin: 0;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+header {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    color: #00bfff;
+}
+
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+main {
+    width: 80%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+
+/* =========================
+   SECTIONS
+   ========================= */
+
+section {
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+}
+
+section h2 {
+    color: #333;
+}
+
+
+/* =========================
+   PROJECTS
+   ========================= */
+
+article {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+
+article:hover {
+    background-color: #f8f8f8;
+}
+
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+    color: #0077cc;
+}
+
+a:hover {
+    color: #0055aa;
+}
+
+
+/* =========================
+   TABLE
+   ========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #222;
+    color: white;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+button {
+    background-color: #222;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0077cc;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+    main {
+        width: 90%;
+    }
+
+    nav a {
+        display: block;
+        margin: 8px;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+}
