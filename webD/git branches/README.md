@@ -1,1 +1,0 @@
-deijf omakr
