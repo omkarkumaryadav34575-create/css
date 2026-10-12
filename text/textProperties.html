@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Text Properties</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f0f0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .box {
+            background-color: rgb(46, 87, 87);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 2px solid rgb(32, 87, 54);
+        }
+
+        /* text-decoration */
+        .underline {
+            text-decoration: underline;
+        }
+
+        .overline {
+            text-decoration: overline;
+        }
+
+        .strike {
+            text-decoration: line-through;
+        }
+
+        /* text-align */
+        .left {
+            text-align: left;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        /* vertical-align */
+        .vertical {
+            font-size: 25px;
+        }
+
+        .vertical span {
+            vertical-align: middle;
+        }
+
+        /* text-transform */
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+
+        /* line-height */
+        .line {
+            line-height: 2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Text Properties</h1>
+
+    <div class="box">
+
+        <h2>1. Text Decoration</h2>
+
+        <p class="underline">This text is underlined.</p>
+
+        <p class="overline">This text has an overline.</p>
+
+        <p class="strike">This text has a line through it.</p>
+
+
+        <h2>2. Text Alignment</h2>
+
+        <p class="left">This text is aligned left.</p>
+
+        <p class="center">This text is aligned center.</p>
+
+        <p class="right">This text is aligned right.</p>
+
+
+        <h2>3. Vertical Align</h2>
+
+        <p class="vertical">
+            Normal Text
+            <span>Middle Text</span>
+        </p>
+
+
+        <h2>4. Text Transform</h2>
+
+        <p class="uppercase">this becomes uppercase.</p>
+
+        <p class="lowercase">THIS BECOMES LOWERCASE.</p>
+
+        <p class="capitalize">this text gets capitalized.</p>
+
+
+        <h2>5. Line Height</h2>
+
+        <p class="line">
+            This paragraph has increased line height.
+            Notice how much space there is between each line.
+            Line height controls the vertical space between lines of text.
+        </p>
+
+    </div>
+
+</body>
+</html>

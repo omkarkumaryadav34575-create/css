@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KNOW — Personal Knowledge &amp; Skill-Building Platform</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body>
+
+  <!-- ========================================================================
+       SIDEBAR NAVIGATION
+       ======================================================================== -->
+  <aside class="sidebar" id="app-sidebar">
+
+    <!-- Logo + Tagline -->
+    <div class="sidebar-header" id="brand-home-btn">
+      <div class="sidebar-logo">
+        <div class="logo-badge">K</div>
+        <div class="sidebar-brand-text">
+          <span class="brand-name">KNOW</span>
+        </div>
+      </div>
+      <p class="sidebar-tagline">Build knowledge.<br>See connections. Never forget.</p>
+    </div>
+
+    <!-- Primary Navigation -->
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <ul class="sidebar-nav-list">
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link active" data-tab="dashboard" role="button" tabindex="0" aria-current="page">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="graph" role="button" tabindex="0">
+            <span class="nav-icon">🕸️</span>
+            <span class="nav-label">Knowledge Graph</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="skills" role="button" tabindex="0">
+            <span class="nav-icon">🌳</span>
+            <span class="nav-label">Skill Builder</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="recall" role="button" tabindex="0">
+            <span class="nav-icon">🧠</span>
+            <span class="nav-label">Memory</span>
+            <span class="nav-badge-count" id="nav-due-count" style="display:none;">0</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="concepts" role="button" tabindex="0">
+            <span class="nav-icon">📉</span>
+            <span class="nav-label">Knowledge Decay</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="challenges" role="button" tabindex="0">
+            <span class="nav-icon">💡</span>
+            <span class="nav-label">Real-World Problems</span>
+          </a>
+        </li>
+
+        <li class="sidebar-nav-item">
+          <a class="nav-link" data-tab="ai" role="button" tabindex="0">
+            <span class="nav-icon">🤖</span>
+            <span class="nav-label">AI Copilot</span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- Sidebar Divider -->
+    <div class="sidebar-divider"></div>
+
+    <!-- Bottom Navigation: Settings + Profile -->
+    <div class="sidebar-bottom">
+
+      <button class="sidebar-bottom-btn" id="settings-modal-btn" title="Settings &amp; Backup">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Settings</span>
+      </button>
+
+      <button class="sidebar-bottom-btn" id="theme-toggle-btn" title="Toggle Light / Dark Mode">
+        <span class="nav-icon">🌓</span>
+        <span class="nav-label">Toggle Theme</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- ========================================================================
+       MOBILE TOPBAR (visible only on small screens)
+       ======================================================================== -->
+  <header class="mobile-topbar">
+    <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open menu">☰</button>
+    <div class="mobile-brand">
+      <div class="logo-badge">K</div>
+      <span class="brand-name">KNOW</span>
+    </div>
+    <button class="btn btn-primary btn-sm" id="quick-add-btn">➕</button>
+  </header>
+
+  <!-- Mobile sidebar backdrop -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ========================================================================
+       MAIN CONTENT AREA
+       ======================================================================== -->
+  <div class="app-shell">
+
+    <!-- Desktop top header bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn btn-primary btn-sm" id="quick-add-btn-desktop">
+          <span>➕</span> <span>New Concept</span>
+        </button>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search-wrap">
+          <span class="search-icon-inline">🔍</span>
+          <input type="text" class="topbar-search" id="global-search-input" placeholder="Search concepts, skills, problems…" autocomplete="off">
+        </div>
+        <div class="profile-avatar" title="Your Profile">
+          <span>👤</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tab sections live inside main -->
+    <main class="app-container">
+
+      <!-- ==================================================================
+           TAB 1: DASHBOARD
+           ================================================================== -->
+      <section class="tab-pane active" id="tab-dashboard">
+
+        <!-- Hero -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title" id="welcome-heading">Welcome back, Learner 👋</h1>
+            <p class="page-subtitle">A live view of your knowledge, review queue, and learning momentum.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-outline btn-sm" id="dash-practice-now-btn">
+              <span>⚡</span> <span>Start Review Session</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Total Concepts</span>
+              <span class="stat-value" id="stat-total-concepts">0</span>
+              <span class="stat-sub">Across all domains</span>
+            </div>
+            <div class="stat-icon">📚</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Knowledge Strength</span>
+              <span class="stat-value" id="stat-avg-retention">0%</span>
+              <span class="stat-sub">Forgetting curve index</span>
+            </div>
+            <div class="stat-icon">📈</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Due for Review</span>
+              <span class="stat-value" id="stat-cards-due">0</span>
+              <span class="stat-sub">Cards ready to review</span>
+            </div>
+            <div class="stat-icon">⏰</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Skills in Progress</span>
+              <span class="stat-value" id="stat-active-skills">0</span>
+              <span class="stat-sub" id="stat-total-xp">0 XP Total</span>
+            </div>
+            <div class="stat-icon">🌳</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-label">Study Streak</span>
+              <span class="stat-value" id="stat-streak-days">1 day</span>
+              <span class="stat-sub">Consistency bonus active</span>
+            </div>
+            <div class="stat-icon">🔥</div>
+          </div>
+
+        </div>
+
+        <!-- Dashboard Two-Column Panels -->
+        <div class="dashboard-columns">
+
+          <div class="dashboard-card">
+            <div class="card-title-row"><div class="card-title"><span>🕘</span> Recent Activity</div></div>
+            <div class="decay-list" id="dashboard-activity-list"><p class="card-desc-text">Loading activity…</p></div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-title-row"><div class="card-title"><span>🌱</span> Skill Progress</div></div>
+            <div class="decay-list" id="dashboard-skills-list"><p class="card-desc-text">Loading skill progress…</p></div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-title-row">
+              <div class="card-title"><span>🧠</span> Memory Review</div>
+              <button class="btn btn-outline btn-sm" id="dash-review-all-btn">Review all</button>
+            </div>
+            <div class="decay-list" id="dashboard-review-list"><p class="card-desc-text">Loading review queue…</p></div>
+          </div>
+
+          <!-- Knowledge Decay Radar -->
+          <div class="dashboard-card">
+            <div class="card-title-row">
+              <div class="card-title">
+                <span>📉</span> Knowledge Decay Radar
+              </div>
+              <span class="badge badge-decayed" id="decay-alert-count">0 At Risk</span>
+            </div>
+            <p class="card-desc-text">
+              Concepts slipping down the Ebbinghaus curve. Review them to reset stability!
+            </p>
+            <div class="decay-list" id="dashboard-decay-list">
+              <p class="card-desc-text">No concepts yet. Click "New Concept" to get started!</p>
+            </div>
+          </div>
+
+          <!-- Active Challenges + AI Prompt -->
+          <div class="dashboard-card">
+            <div class="card-title-row">
+              <div class="card-title">
+                <span>💡</span> Active Applied Challenges
+              </div>
+              <button class="btn btn-outline btn-sm" id="dash-view-all-challenges-btn">View Lab</button>
+            </div>
+            <p class="card-desc-text">
+              Solve real-world scenarios to synthesize concepts into durable skills.
+            </p>
+            <div class="decay-list" id="dashboard-challenges-list">
+              <p class="card-desc-text">No challenges yet. Create your first real-world problem!</p>
+            </div>
+
+            <div class="dash-divider-section">
+              <div class="card-title">
+                <span>🤖</span> AI Tutor Prompt of the Day
+              </div>
+              <div class="dash-ai-prompt-box">
+                "Select any decaying concept and ask me to generate a Feynman technique explanation to rebuild your intuition."
+              </div>
+              <button class="btn btn-primary btn-sm btn-full" id="dash-ask-ai-btn">
+                Open AI Copilot
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 2: KNOWLEDGE GRAPH
+           ================================================================== -->
+      <section class="tab-pane" id="tab-graph">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Knowledge Graph</h1>
+            <p class="page-subtitle">Visualize associations, dependencies, and neural pathways across your knowledge base.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary btn-sm" id="graph-reset-btn">Reset View</button>
+            <button class="btn btn-primary btn-sm" id="graph-add-concept-btn">
+              <span>➕</span> <span>Add Concept</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Graph workspace: canvas + overlay controls + info panel -->
+        <div class="graph-workspace">
+
+          <!-- Canvas area -->
+          <div class="graph-container">
+            <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+
+            <!-- Search overlay (top-left) -->
+            <div class="graph-search-panel">
+              <span class="search-icon-inline">🔍</span>
+              <input type="text" class="input graph-search-input" id="graph-search-input" placeholder="Search node…">
+            </div>
+
+            <!-- Controls overlay (top-right) -->
+            <div class="graph-controls">
+              <select class="select graph-color-select" id="graph-color-mode-select">
+                <option value="domain">Color: By Domain</option>
+                <option value="decay">Color: By Retention</option>
+              </select>
+              <button class="btn btn-secondary btn-sm" id="graph-zoom-in" title="Zoom In">+</button>
+              <button class="btn btn-secondary btn-sm" id="graph-zoom-out" title="Zoom Out">−</button>
+            </div>
+
+            <!-- Legend (bottom-left) -->
+            <div class="graph-legend">
+              <div class="legend-item"><span class="legend-dot legend-dot-fresh"></span> Fresh (&ge;80%)</div>
+              <div class="legend-item"><span class="legend-dot legend-dot-fading"></span> Fading (50–79%)</div>
+              <div class="legend-item"><span class="legend-dot legend-dot-decayed"></span> Decayed (&lt;50%)</div>
+              <span>• Drag to move &nbsp;• Scroll to zoom</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 3: SKILL BUILDER
+           ================================================================== -->
+      <section class="tab-pane" id="tab-skills">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Skill Builder</h1>
+            <p class="page-subtitle">Turn theoretical concepts into leveled, demonstrable capabilities.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary btn-sm" id="add-skill-btn">
+              <span>➕</span> <span>Create Skill Track</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample skill roadmap hint (populated by JS) -->
+        <div class="skills-grid" id="skills-grid-container">
+          <div class="empty-state-card">
+            <div class="empty-deck-icon">🌱</div>
+            <h3>No skill tracks yet</h3>
+            <p class="card-desc-text">Create a skill track to map the concepts and challenges you need to master a capability.</p>
+            <button class="btn btn-primary" id="skills-cta-create-btn">Create First Skill Track</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================================================================
+           TAB 4: MEMORY (Active Recall / Spaced Repetition)
+           ================================================================== -->
+      <section class="tab-pane" id="tab-recall">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Memory</h1>
+            <p class="page-subtitle">Active recall + spaced repetition powered by the SuperMemo-2 algorithm.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-secondary btn-sm" id="add-flashcard-btn">
+              <span>➕</span> <span>Create Flashcard</span>
+            </button>
+            <button class="btn btn-outline btn-sm" id="study-all-cards-btn">Study Full Deck</button>
+          </div>
+        </div>
+
+        <div class="recall-container">
+
+          <!-- Progress Header -->
+          <div class="study-progress-header" id="recall-progress-bar-row">
+            <span id="recall-counter-text">Card 1 of 5</span>
+            <span id="recall-deck-status" class="badge badge-fresh">In Queue</span>
+          </div>
+
+          <!-- Flip Card -->
+          <div class="flashcard-wrapper" id="flashcard-interactive-card">
+            <div class="flashcard-inner">
+
+              <!-- Front Face -->
+              <div class="flashcard-face flashcard-front">
+                <div class="card-hint-top">
+                  <span id="fc-concept-title">Spaced Repetition</span>
+                  <span>Active Recall Prompt</span>
+                </div>
+                <div class="card-prompt-text" id="fc-front-text">
+                  What is the spacing effect and why does it strengthen long-term synaptic memory?
+                </div>
+                <div class="card-footer-tip">
+                  👆 Click card or press [Space] to flip &amp; reveal answer
+                </div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="flashcard-face flashcard-back">
+                <div class="card-hint-top">
+                  <span>Model Answer</span>
+                  <span>Verification</span>
+                </div>
+                <div class="card-answer-text" id="fc-back-text">
+                  The spacing effect shows that learning is greater when study sessions are spaced out over time rather than massed together.
+                </div>
+                <div class="card-footer-tip">
+                  Rate your retrieval difficulty below to update the SM-2 schedule
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- SM-2 Rating Buttons -->
+          <div class="sm2-ratings-row" id="sm2-buttons-row">
+            <button class="btn-rate btn-rate-again" data-rating="1">
+              <span class="rate-title">Again</span>
+              <span class="rate-sub">&lt; 1 day</span>
+            </button>
+            <button class="btn-rate btn-rate-hard" data-rating="2">
+              <span class="rate-title">Hard</span>
+              <span class="rate-sub">3 days</span>
+            </button>
+            <button class="btn-rate btn-rate-good" data-rating="3">
+              <span class="rate-title">Good</span>
+              <span class="rate-sub">6 days</span>
+            </button>
+            <button class="btn-rate btn-rate-easy" data-rating="4">
+              <span class="rate-title">Easy</span>
+              <span class="rate-sub">12 days</span>
+            </button>
+          </div>
+
+          <!-- Session Complete State -->
+          <div class="empty-deck-state" id="empty-deck-display">
+            <div class="empty-deck-icon">🎉</div>
+            <h2>Review Session Complete!</h2>
+            <p class="card-desc-text">
+              All due cards reviewed. Ebbinghaus stability parameters updated. Great work!
+            </p>
+            <button class="btn btn-primary" id="restart-deck-btn">Review Full Deck</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TAB 5: KNOWLEDGE DECAY (Concepts view)
+           ================================================================== -->
+      <section class="tab-pane" id="tab-concepts">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Knowledge Decay</h1>
+            <p class="page-subtitle">Monitor retention strength across your entire knowledge base and reinforce before you forget.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary btn-sm" id="add-concept-btn">
+              <span>➕</span> <span>Add Concept</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Decay Strength Overview Badges -->
+        <div class="decay-overview-strip">
+          <div class="decay-band decay-band-strong">
+            <span class="decay-band-icon">💪</span>
+            <div>
+              <div class="decay-band-label">Strong</div>
+              <div class="decay-band-sub">&ge; 85% retention</div>
+            </div>
+          </div>
+          <div class="decay-band decay-band-stable">
+            <span class="decay-band-icon">✅</span>
+            <div>
+              <div class="decay-band-label">Stable</div>
+              <div class="decay-band-sub">70–84% retention</div>
+            </div>
+          </div>
+          <div class="decay-band decay-band-review">
+            <span class="decay-band-icon">⚠️</span>
+            <div>
+              <div class="decay-band-label">Needs Review</div>
+              <div class="decay-band-sub">50–69% retention</div>
+            </div>
+          </div>
+          <div class="decay-band decay-band-weak">
+            <span class="decay-band-icon">📉</span>
+            <div>
+              <div class="decay-band-label">Weak</div>
+              <div class="decay-band-sub">30–49% retention</div>
+            </div>
+          </div>
+          <div class="decay-band decay-band-critical">
+            <span class="decay-band-icon">🔴</span>
+            <div>
+              <div class="decay-band-label">Critical</div>
+              <div class="decay-band-sub">&lt; 30% retention</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="input" id="concepts-search" placeholder="Search concepts by title, content, or tags…">
+          </div>
+          <select class="select filter-select" id="concepts-domain-filter">
+            <option value="all">All Domains</option>
+          </select>
+          <select class="select filter-select" id="concepts-decay-filter">
+            <option value="all">All Retention Levels</option>
+            <option value="fresh">Fresh (&ge; 80%)</option>
+            <option value="fading">Fading (50% – 79%)</option>
+            <option value="decayed">Decayed (&lt; 50%)</option>
+          </select>
+        </div>
+
+        <!-- Concepts Grid (rendered by JS) -->
+        <div class="concepts-grid" id="concepts-grid-container"></div>
+
+      </section>
+
+      <!-- ==================================================================
+           TAB 6: REAL-WORLD PROBLEMS (Problem Lab)
+           ================================================================== -->
+      <section class="tab-pane" id="tab-challenges">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Real-World Problems</h1>
+            <p class="page-subtitle">Synthesize concepts by solving real engineering &amp; design challenges.</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary btn-sm" id="add-challenge-btn">
+              <span>➕</span> <span>Create Challenge</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Problem Cards Grid (rendered by JS) -->
+        <div class="challenges-grid" id="challenges-grid-container">
+          <div class="empty-state-card" style="grid-column:1/-1;">
+            <div class="empty-deck-icon">🛠️</div>
+            <h3>No problems yet</h3>
+            <p class="card-desc-text">Create your first real-world challenge to apply your knowledge to practical scenarios.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================================================================
+           TAB 7: AI COPILOT
+           ================================================================== -->
+      <section class="tab-pane" id="tab-ai">
+
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">AI Copilot</h1>
+            <p class="page-subtitle">Pedagogical tutor grounded in your knowledge base. Optionally powered by Google Gemini.</p>
+          </div>
+          <div class="page-actions">
+            <span class="badge badge-domain" id="ai-active-mode-badge">Offline Mode</span>
+          </div>
+        </div>
+
+        <div class="ai-layout">
+
+          <!-- Left toolkit panel -->
+          <aside class="ai-sidebar">
+
+            <div class="ai-tool-box">
+              <h4 class="form-label">Active Context Concept</h4>
+              <p class="form-help">Select a concept to ground the AI's feedback:</p>
+              <select class="select" id="ai-context-concept-select">
+                <option value="">None (General Guidance)</option>
+              </select>
+            </div>
+
+            <div class="ai-tool-box">
+              <h4 class="form-label">Learning Accelerators</h4>
+              <button class="ai-quick-btn" data-prompt="Explain this concept using the Feynman technique (ELI5 and analogies)">
+                <span>💡</span> <span>Feynman Simplification</span>
+              </button>
+              <button class="ai-quick-btn" data-prompt="Generate 2 high-yield active recall flashcards for this concept">
+                <span>🎴</span> <span>Generate Flashcards</span>
+              </button>
+              <button class="ai-quick-btn" data-prompt="Create a challenging real-world engineering problem scenario based on this concept">
+                <span>🛠️</span> <span>Design Real Challenge</span>
+              </button>
+              <button class="ai-quick-btn" data-prompt="Test my understanding with a challenging Socratic question">
+                <span>🏛️</span> <span>Socratic Examination</span>
+              </button>
+              <button class="ai-quick-btn" data-prompt="What should I learn next based on my knowledge decay?">
+                <span>📉</span> <span>What to Learn Next</span>
+              </button>
+            </div>
+
+            <div class="ai-tool-box">
+              <h4 class="form-label">AI Settings</h4>
+              <p class="form-help">
+                Add a Google Gemini API Key in Settings to unlock live LLM inference, or use the built-in offline engine.
+              </p>
+              <button class="btn btn-outline btn-sm" id="ai-open-settings-btn">Configure API Key</button>
+            </div>
+
+          </aside>
+
+          <!-- Right chat window -->
+          <div class="ai-chat-window">
+
+            <div class="ai-chat-header">
+              <div>
+                <span>🤖</span>
+                <strong>KNOW Cognitive Tutor</strong>
+              </div>
+              <button class="btn btn-outline btn-sm" id="ai-clear-chat-btn">Clear Chat</button>
+            </div>
+
+            <div class="ai-chat-messages" id="ai-chat-messages-container">
+              <!-- Welcome message injected by JS -->
+            </div>
+
+            <div class="ai-chat-input-row">
+              <input type="text" class="input" id="ai-chat-input"
+                     placeholder="Ask a question, request an analogy, or test a concept…"
+                     autocomplete="off">
+              <button class="btn btn-primary" id="ai-send-btn">
+                <span>Send</span> <span>➤</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div><!-- /.app-shell -->
+
+
+  <!-- ========================================================================
+       MODALS
+       ======================================================================== -->
+
+  <!-- Modal 1: Create / Edit Concept -->
+  <div class="modal-overlay" id="modal-concept" role="dialog" aria-modal="true" aria-labelledby="concept-modal-title">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="concept-modal-title">Create New Concept</h3>
+        <button class="modal-close" data-close="modal-concept" aria-label="Close">&times;</button>
+      </div>
+      <form id="concept-form" novalidate>
+        <input type="hidden" id="concept-id-input">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label" for="concept-title-input">Concept Title *</label>
+            <input type="text" class="input" id="concept-title-input" required
+                   placeholder="e.g. Distributed Consensus (Raft)">
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="concept-domain-input">Domain / Subject *</label>
+              <input type="text" class="input" id="concept-domain-input" required
+                     placeholder="e.g. Computer Science">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="concept-tags-input">Tags (comma-separated)</label>
+              <input type="text" class="input" id="concept-tags-input"
+                     placeholder="algorithms, distributed, backend">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="concept-summary-input">One-Sentence Summary *</label>
+            <input type="text" class="input" id="concept-summary-input" required
+                   placeholder="High-level intuitive takeaway…">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="concept-content-input">Detailed Notes &amp; Mental Model</label>
+            <textarea class="textarea" id="concept-content-input"
+                      placeholder="Explain the mechanism, core trade-offs, and examples…"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Connect to Related Concepts</label>
+            <div class="connections-selector-box" id="concept-connections-checkboxes"></div>
+            <span class="form-help">Connections create edges on your Knowledge Graph.</span>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="modal-concept">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save-concept-submit-btn">Save Concept</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Concept Detail Viewer -->
+  <div class="modal-overlay" id="modal-concept-detail" role="dialog" aria-modal="true" aria-labelledby="detail-concept-title">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-domain" id="detail-concept-domain">Domain</span>
+          <h3 class="modal-title" id="detail-concept-title">Concept Title</h3>
+        </div>
+        <button class="modal-close" data-close="modal-concept-detail" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="detail-retention-box">
+          <div>
+            <div class="form-help">Current Memory Retention</div>
+            <div class="modal-title" id="detail-concept-retention">—</div>
+          </div>
+          <button class="btn btn-success btn-sm" id="detail-boost-memory-btn">
+            <span>⚡</span> <span>Boost Memory (+Review)</span>
+          </button>
+        </div>
+
+        <div>
+          <h4 class="detail-section-label">Summary</h4>
+          <p id="detail-concept-summary"></p>
+        </div>
+
+        <div>
+          <h4 class="detail-section-label">Knowledge Content</h4>
+          <div class="detail-content-box" id="detail-concept-content"></div>
+        </div>
+
+        <div>
+          <h4 class="detail-section-label">Connected Concepts</h4>
+          <div class="detail-connections-wrap" id="detail-concept-connections"></div>
+        </div>
+
+      </div>
+      <div class="modal-footer modal-footer-between">
+        <button class="btn btn-danger btn-sm" id="detail-delete-concept-btn">Delete Concept</button>
+        <div class="page-actions">
+          <button class="btn btn-secondary btn-sm" id="detail-ai-explain-btn">Ask AI Copilot</button>
+          <button class="btn btn-primary btn-sm" id="detail-edit-concept-btn">Edit Concept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Create Active Recall Flashcard -->
+  <div class="modal-overlay" id="modal-flashcard" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Active Recall Flashcard</h3>
+        <button class="modal-close" data-close="modal-flashcard" aria-label="Close">&times;</button>
+      </div>
+      <form id="flashcard-form" novalidate>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label" for="flashcard-concept-select">Associated Concept *</label>
+            <select class="select" id="flashcard-concept-select" required></select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="flashcard-front-input">Front — Prompt / Question *</label>
+            <textarea class="textarea" id="flashcard-front-input" required
+                      placeholder="e.g. Under what conditions does Topological Sort fail?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="flashcard-back-input">Back — Answer / Explanation *</label>
+            <textarea class="textarea" id="flashcard-back-input" required
+                      placeholder="e.g. When the directed graph contains a cycle!"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="modal-flashcard">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Flashcard</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Challenge Solver Workspace -->
+  <div class="modal-overlay" id="modal-challenge-solver" role="dialog" aria-modal="true" aria-labelledby="solver-title">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <div>
+          <span class="badge badge-domain" id="solver-difficulty-badge">Intermediate</span>
+          <h3 class="modal-title" id="solver-title">Challenge Title</h3>
+        </div>
+        <button class="modal-close" data-close="modal-challenge-solver" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body solver-modal-body">
+
+        <div class="solver-section">
+          <h4>Scenario</h4>
+          <p id="solver-scenario" class="card-desc-text"></p>
+        </div>
+
+        <div class="solver-section">
+          <h4>Key Objectives &amp; Requirements</h4>
+          <ul id="solver-requirements" class="challenge-reqs"></ul>
+        </div>
+
+        <div class="solver-section">
+          <div class="card-title-row">
+            <h4>Your Solution &amp; Notes</h4>
+            <button type="button" class="btn btn-outline btn-sm" id="solver-toggle-hints-btn">Show Hints</button>
+          </div>
+          <div class="solver-hints-box" id="solver-hints-box"></div>
+          <textarea class="textarea" id="solver-user-solution"
+                    placeholder="Draft your design, formulas, or algorithmic strategy here…"></textarea>
+        </div>
+
+        <div class="solver-section" id="solver-model-guide-section">
+          <h4>Model Solution &amp; Architectural Benchmark</h4>
+          <div class="solver-model-guide" id="solver-model-guide"></div>
+        </div>
+
+      </div>
+      <div class="modal-footer modal-footer-between">
+        <button type="button" class="btn btn-outline" id="solver-reveal-guide-btn">Compare with Model Solution</button>
+        <div class="page-actions">
+          <button type="button" class="btn btn-primary" id="solver-mark-complete-btn">Mark as Solved (+100 XP)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Create Real-World Challenge -->
+  <div class="modal-overlay" id="modal-challenge-create" role="dialog" aria-modal="true">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Real-World Challenge</h3>
+        <button class="modal-close" data-close="modal-challenge-create" aria-label="Close">&times;</button>
+      </div>
+      <form id="challenge-create-form" novalidate>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label" for="ch-create-title">Challenge Title *</label>
+            <input type="text" class="input" id="ch-create-title" required
+                   placeholder="e.g. Design a Cache Layer for High-Concurrency System">
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label" for="ch-create-difficulty">Difficulty *</label>
+              <select class="select" id="ch-create-difficulty">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate" selected>Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="ch-create-skill">Target Skill *</label>
+              <select class="select" id="ch-create-skill" required></select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ch-create-scenario">Scenario Brief *</label>
+            <textarea class="textarea" id="ch-create-scenario" required
+                      placeholder="Describe the practical challenge context, constraints, and problem…"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ch-create-requirements">Requirements (one per line) *</label>
+            <textarea class="textarea" id="ch-create-requirements" required
+                      placeholder="Identify bottleneck&#10;Implement solution&#10;Verify performance"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ch-create-solution">Model Solution Guide *</label>
+            <textarea class="textarea" id="ch-create-solution" required
+                      placeholder="Explanation of the optimal approach…"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="modal-challenge-create">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Challenge</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 6: Create Skill Track -->
+  <div class="modal-overlay" id="modal-skill" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Skill Progression Track</h3>
+        <button class="modal-close" data-close="modal-skill" aria-label="Close">&times;</button>
+      </div>
+      <form id="skill-form" novalidate>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label" for="skill-name-input">Skill Name *</label>
+            <input type="text" class="input" id="skill-name-input" required
+                   placeholder="e.g. Distributed Consensus Engineering">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skill-category-input">Category *</label>
+            <input type="text" class="input" id="skill-category-input" required
+                   placeholder="e.g. System Design">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skill-desc-input">Description *</label>
+            <textarea class="textarea" id="skill-desc-input" required
+                      placeholder="What capability does this skill grant?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Required Concepts</label>
+            <div class="connections-selector-box" id="skill-concepts-select-box"></div>
+            <span class="form-help">Concepts whose mastery counts toward this skill's progress.</span>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="modal-skill">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Skill Track</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 7: Settings & Data Management -->
+  <div class="modal-overlay" id="modal-settings" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Settings &amp; Data Management</h3>
+        <button class="modal-close" data-close="modal-settings" aria-label="Close">&times;</button>
+      </div>
+      <form id="settings-form" novalidate>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="form-label" for="settings-username-input">User Name</label>
+            <input type="text" class="input" id="settings-username-input" placeholder="Your Name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settings-api-key-input">Google Gemini API Key (Optional)</label>
+            <input type="password" class="input" id="settings-api-key-input" placeholder="AIzaSy…">
+            <span class="form-help">
+              Stored exclusively in your browser's localStorage. Enables live AI inference. If blank, KNOW runs in offline pedagogical mode.
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settings-model-select">Gemini Model</label>
+            <select class="select" id="settings-model-select">
+              <option value="gemini-1.5-flash">Gemini 1.5 Flash (Fast &amp; Recommended)</option>
+              <option value="gemini-1.5-pro">Gemini 1.5 Pro (Deep Reasoning)</option>
+              <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash (Experimental)</option>
+            </select>
+          </div>
+
+          <hr class="form-divider">
+
+          <div>
+            <h4 class="form-label">Data Backup &amp; Portability</h4>
+            <p class="form-help">
+              Export your entire knowledge graph, flashcards, skills, and challenges as JSON, or restore from a previous backup.
+            </p>
+            <div class="page-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="export-json-btn">
+                <span>📥</span> <span>Export Backup (JSON)</span>
+              </button>
+              <label class="btn btn-outline btn-sm">
+                <span>📤</span> <span>Import Backup</span>
+                <input type="file" id="import-json-input" accept=".json" class="hidden-file-input">
+              </label>
+            </div>
+          </div>
+
+          <hr class="form-divider">
+
+          <div>
+            <h4 class="form-label">Danger Zone</h4>
+            <button type="button" class="btn btn-danger btn-sm" id="reset-factory-data-btn">
+              Reset to Factory Seed Data
+            </button>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close="modal-settings">Close</button>
+          <button type="submit" class="btn btn-primary">Save Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" role="status" aria-live="polite"></div>
+
+
+  <!-- ========================================================================
+       JAVASCRIPT MODULES — loaded in dependency order
+       ======================================================================== -->
+  <script src="js/storage.js"></script>
+  <script src="js/decay.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/ai.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Mobile sidebar toggle (no framework, no inline JS in HTML) -->
+  <script src="js/sidebar.js"></script>
+
+</body>
+</html>
