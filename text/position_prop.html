@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.text {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+}
+.topleft {
+  top: 8px;
+  left: 16px;
+}
+
+.topcenter {
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topright {
+  top: 8px;
+  right: 16px;
+}
+
+
+
+.leftcenter {
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rightcenter {
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+}
+
+.bottomleft {
+  bottom: 8px;
+  left: 16px;
+}
+
+.bottomcenter {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottomright {
+  bottom: 8px;
+  right: 16px;
+}
+
+
+img { 
+  width: 100%;
+  height: auto;
+  opacity: 0.5;
+  display: block;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Position Text on Image</h2>
+
+<p>Position "OMKAR" at different locations on my image:</p>
+
+<div class="container">
+
+  <img src="image.png" alt="My Image">
+
+ 
+  <div class="text topleft">OMKAR</div>
+  <div class="text topcenter">OMKAR</div>
+  <div class="text topright">OMKAR</div>
+  <div class="text leftcenter">OMKAR</div>
+  <div class="text center">OMKAR</div>
+  <div class="text rightcenter">OMKAR</div>
+  <div class="text bottomleft">OMKAR</div>
+  <div class="text bottomcenter">OMKAR</div>
+  <div class="text bottomright">OMKAR</div>
+
+</div>
+
+</body>
+</html>
